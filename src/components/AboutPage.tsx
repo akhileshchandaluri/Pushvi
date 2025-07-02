@@ -87,12 +87,31 @@ export const AboutPage: React.FC = () => {
                 "We don't just make cosmetics — we create a movement. One that celebrates purity, protects nature, and proves that beauty can bloom from what's left behind."
               </p>
             </div>
-            <div className="flex justify-center">
+            <div className="flex justify-center flex-col items-center">
+              {/* Test with founder image */}
               <img
                 src="/images/founder-akhilesh.jpg?v=1"
                 alt="Akhilesh Chandaluri - Founder"
-                className="w-48 h-48 rounded-full object-cover shadow-lg"
+                className="w-48 h-48 rounded-full object-cover shadow-lg mb-4"
+                onLoad={() => console.log('Founder image loaded successfully')}
+                onError={(e) => console.error('Founder image failed to load:', e)}
+                style={{ border: '2px solid red' }}
               />
+              
+              {/* Test with logo image */}
+              <img
+                src="/images/test-logo.png"
+                alt="Test Logo"
+                className="w-24 h-24 rounded-full object-cover shadow-lg mb-4"
+                onLoad={() => console.log('Test logo loaded successfully')}
+                onError={(e) => console.error('Test logo failed to load:', e)}
+                style={{ border: '2px solid green' }}
+              />
+              
+              <div className="text-center">
+                <p className="text-sm text-gray-500">Founder path: /images/founder-akhilesh.jpg?v=1</p>
+                <p className="text-sm text-gray-500">Logo path: /images/test-logo.png</p>
+              </div>
             </div>
           </div>
         </div>
