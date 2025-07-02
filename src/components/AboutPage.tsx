@@ -1,6 +1,7 @@
 import React from 'react';
 import { Award, Heart, Leaf } from 'lucide-react';
 import pushviLogo from '../assets/pushvi-logo.png';
+import founderImage from '../assets/founder-akhilesh.jpg';
 
 export const AboutPage: React.FC = () => {
   return (
@@ -89,9 +90,9 @@ export const AboutPage: React.FC = () => {
             </div>
             <div className="flex justify-center">
               <img
-                src={pushviLogo}
-                alt="Pushvi Founder Logo"
-                className="w-48 h-48 rounded-full object-contain shadow-lg bg-white p-4"
+                src={founderImage}
+                alt="Akhilesh Chandaluri - Founder"
+                className="w-48 h-48 rounded-full object-cover shadow-lg"
               />
             </div>
           </div>
