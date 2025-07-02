@@ -133,7 +133,7 @@ export const CartPage: React.FC<CartPageProps> = ({
 
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                🔒 Secure checkout • Free shipping on orders over ₹4200
+                🔒 Secure checkout • Free shipping on orders over ₹500
               </p>
             </div>
           </div>
