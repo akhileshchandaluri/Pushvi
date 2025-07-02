@@ -1,5 +1,5 @@
 import { Product } from '../types';
-import roseLipBalmImg from '../assets/rose-lip-balm.png';
+import roseLipBalmImg from '../assets/rose-lip-balm1.png';
 import rosyPinkBlushImg from '../assets/rosy-pink-blush.png';
 import floralBodyOilImg from '../assets/floral-body-oil.png';
 
