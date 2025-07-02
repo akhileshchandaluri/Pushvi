@@ -7,8 +7,8 @@ export const products: Product[] = [
   {
     id: 'prdct1',
     name: 'Floral Lip Balm – Rose Infused',
-    price: 1250,
-    image: roseLipBalmImg,
+    price: 150,
+    image: rosyPinkBlushImg,
     description: 'A soft, nourishing balm made from real rose extracts to heal, hydrate, and add a natural glow to your lips.',
     shade: 'Rose',
     finish: 'satin',
@@ -17,8 +17,8 @@ export const products: Product[] = [
   {
     id: 'prdct2',
     name: 'Rosy Pink Blush – Rose Petal Based',
-    price: 1500,
-    image: rosyPinkBlushImg,
+    price: 100,
+    image: roseLipBalmImg,
     description: 'A lightweight, natural blush made from crushed rose petals for a soft, dewy pink tint that flatters every skin tone.',
     shade: 'Rosy Pink',
     finish: 'matte',
@@ -27,7 +27,7 @@ export const products: Product[] = [
   {
     id: 'prdct3',
     name: 'Floral Body Oil – Botanical Blend',
-    price: 1800,
+    price: 300,
     image: floralBodyOilImg,
     description: 'A soothing, non-greasy body oil made from flower-infused oils to deeply moisturize, soften, and leave your skin naturally radiant.',
     shade: 'Botanical Blend',
