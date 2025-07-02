@@ -4,6 +4,7 @@ import { HomePage } from './components/HomePage';
 import { AboutPage } from './components/AboutPage';
 import { SignInPage } from './components/SignInPage';
 import { CartPage } from './components/CartPage';
+import { ImageTest } from './components/ImageTest';
 import { useStore } from './hooks/useStore';
 
 function App() {
@@ -52,16 +53,7 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <Header
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-        cartItemsCount={getTotalItems()}
-        user={user}
-        signOut={signOut}
-        searchQuery={searchQuery}
-        setSearchQuery={setSearchQuery}
-      />
-      {renderCurrentPage()}
+      <ImageTest />
     </div>
   );
 }
