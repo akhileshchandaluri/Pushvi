@@ -40,7 +40,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onAddToCart }
         <p className="text-sm text-gray-500 mb-4 line-clamp-2">{product.description}</p>
         
         <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold text-gray-900">${product.price}</span>
+          <span className="text-2xl font-bold text-gray-900">₹{product.price}</span>
           <button
             onClick={() => onAddToCart(product)}
             disabled={!product.inStock}

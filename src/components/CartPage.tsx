@@ -69,7 +69,7 @@ export const CartPage: React.FC<CartPageProps> = ({
                   <div className="flex-1">
                     <h3 className="text-lg font-semibold text-gray-900">{item.product.name}</h3>
                     <p className="text-sm text-gray-600">{item.product.shade} • {item.product.finish}</p>
-                    <p className="text-lg font-bold text-gray-900 mt-1">${item.product.price}</p>
+                    <p className="text-lg font-bold text-gray-900 mt-1">₹{item.product.price}</p>
                   </div>
                   <div className="flex items-center space-x-3">
                     <button
@@ -106,7 +106,7 @@ export const CartPage: React.FC<CartPageProps> = ({
             <div className="space-y-4 mb-6">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">${getTotalPrice().toFixed(2)}</span>
+                <span className="font-medium">₹{getTotalPrice().toFixed(2)}</span>
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
@@ -114,12 +114,12 @@ export const CartPage: React.FC<CartPageProps> = ({
               </div>
               <div className="flex justify-between">
                 <span className="text-gray-600">Tax</span>
-                <span className="font-medium">${(getTotalPrice() * 0.08).toFixed(2)}</span>
+                <span className="font-medium">₹{(getTotalPrice() * 0.08).toFixed(2)}</span>
               </div>
               <div className="border-t border-gray-200 pt-4">
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
-                  <span>${(getTotalPrice() * 1.08).toFixed(2)}</span>
+                  <span>₹{(getTotalPrice() * 1.08).toFixed(2)}</span>
                 </div>
               </div>
             </div>
@@ -133,7 +133,7 @@ export const CartPage: React.FC<CartPageProps> = ({
 
             <div className="text-center">
               <p className="text-sm text-gray-500">
-                🔒 Secure checkout • Free shipping on orders over $50
+                🔒 Secure checkout • Free shipping on orders over ₹4200
               </p>
             </div>
           </div>
