@@ -53,7 +53,16 @@ function App() {
 
   return (
     <div className="min-h-screen bg-gray-50">
-      <ImageTest />
+      <Header
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        cartItemsCount={getTotalItems()}
+        user={user}
+        signOut={signOut}
+        searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
+      />
+      {renderCurrentPage()}
     </div>
   );
 }

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Award, Heart, Leaf } from 'lucide-react';
 import pushviLogo from '../assets/pushvi-logo.png';
-import founderPhoto from '../assets/founder.png';
 
 export const AboutPage: React.FC = () => {
   return (
@@ -88,28 +87,13 @@ export const AboutPage: React.FC = () => {
                 "We don't just make cosmetics — we create a movement. One that celebrates purity, protects nature, and proves that beauty can bloom from what's left behind."
               </p>
             </div>
-            <div className="flex justify-center space-x-8">
-              {/* Test with logo (we know this works) */}
-              <div className="text-center">
-                <img
-                  src={pushviLogo}
-                  alt="Logo Test"
-                  className="w-48 h-48 rounded-full object-cover shadow-lg border-4 border-green-500"
-                />
-                <p className="text-green-600 font-bold mt-2">LOGO (WORKS)</p>
-              </div>
-              
-              {/* Test with founder photo */}
-              <div className="text-center">
-                <img
-                  src={founderPhoto}
-                  alt="Akhilesh Chandaluri - Founder"
-                  className="w-48 h-48 rounded-full object-cover shadow-lg border-4 border-red-500"
-                  onLoad={() => console.log('✅ Founder photo loaded!')}
-                  onError={(e) => console.error('❌ Founder photo failed:', e)}
-                />
-                <p className="text-red-600 font-bold mt-2">FOUNDER (TEST)</p>
-              </div>
+            <div className="flex justify-center">
+              <img
+                src="/founder.jpg"
+                alt="Akhilesh Chandaluri - Founder"
+                className="w-48 h-48 rounded-full object-cover shadow-lg"
+                style={{ maxWidth: '192px', maxHeight: '192px' }}
+              />
             </div>
           </div>
         </div>
