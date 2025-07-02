@@ -1,3 +1,4 @@
+// Force deployment test - rupee pricing update
 import React from 'react';
 import { ShoppingBag, User, Search, Heart } from 'lucide-react';
 import { Page } from '../types';
@@ -37,7 +38,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={() => setCurrentPage('home')}
           >
             <img src={pushviLogo} alt="Pushvi Logo" className="w-10 h-10 object-contain" />
-            <span className="ml-2 text-2xl font-bold text-gray-900 font-serif">pushvi</span>
+            <span className="ml-2 text-2xl font-bold text-gray-900 font-serif">pushvi - ₹RUPEES</span>
           </div>
 
           {/* Navigation */}
