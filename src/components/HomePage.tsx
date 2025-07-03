@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import { ProductCard } from './ProductCard';
 import { products } from '../data/products';
 import { Product } from '../types';
@@ -9,14 +9,41 @@ interface HomePageProps {
 }
 
 export const HomePage: React.FC<HomePageProps> = ({ onAddToCart, searchQuery }) => {
-  const filteredProducts = useMemo(() => {
-    if (!searchQuery) return products;
-    return products.filter(product =>
-      product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.shade.toLowerCase().includes(searchQuery.toLowerCase()) ||
-      product.finish.toLowerCase().includes(searchQuery.toLowerCase())
-    );
-  }, [searchQuery]);
+  const [sortBy, setSortBy] = useState<string>('popular');
+
+  const filteredAndSortedProducts = useMemo(() => {
+    // First filter by search query
+    let filtered = products;
+    if (searchQuery) {
+      filtered = products.filter(product =>
+        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.shade.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.finish.toLowerCase().includes(searchQuery.toLowerCase())
+      );
+    }
+
+    // Then sort the filtered products
+    const sorted = [...filtered];
+    switch (sortBy) {
+      case 'price-low-high':
+        return sorted.sort((a, b) => a.price - b.price);
+      case 'price-high-low':
+        return sorted.sort((a, b) => b.price - a.price);
+      case 'name-a-z':
+        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+      case 'name-z-a':
+        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+      case 'newest':
+        return sorted.reverse(); // Assuming the array order represents newest to oldest
+      case 'popular':
+      default:
+        return sorted; // Keep original order for popular
+    }
+  }, [searchQuery, sortBy]);
+
+  const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(event.target.value);
+  };
 
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -34,25 +61,29 @@ export const HomePage: React.FC<HomePageProps> = ({ onAddToCart, searchQuery }) 
       <div className="mb-12">
         <div className="flex items-center justify-between mb-8">
           <h2 className="text-3xl font-bold text-gray-900">
-            {searchQuery ? `Search Results (${filteredProducts.length})` : 'Featured Collection'}
+            {searchQuery ? `Search Results (${filteredAndSortedProducts.length})` : 'Featured Collection'}
           </h2>
-          {!searchQuery && (
-            <select className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500">
-              <option>Sort by Popular</option>
-              <option>Price: Low to High</option>
-              <option>Price: High to Low</option>
-              <option>Newest First</option>
-            </select>
-          )}
+          <select 
+            className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
+            value={sortBy}
+            onChange={handleSortChange}
+          >
+            <option value="popular">Sort by Popular</option>
+            <option value="price-low-high">Price: Low to High</option>
+            <option value="price-high-low">Price: High to Low</option>
+            <option value="name-a-z">Name: A to Z</option>
+            <option value="name-z-a">Name: Z to A</option>
+            <option value="newest">Newest First</option>
+          </select>
         </div>
 
-        {filteredProducts.length === 0 ? (
+        {filteredAndSortedProducts.length === 0 ? (
           <div className="text-center py-16">
             <p className="text-gray-500 text-lg">No products found matching your search.</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-            {filteredProducts.map(product => (
+            {filteredAndSortedProducts.map(product => (
               <ProductCard
                 key={product.id}
                 product={product}
