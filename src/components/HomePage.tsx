@@ -23,22 +23,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onAddToCart, searchQuery }) 
     }
 
     // Then sort the filtered products
-    const sorted = [...filtered];
+    let sorted = [...filtered];
+    
     switch (sortBy) {
       case 'price-low-high':
-        return sorted.sort((a, b) => a.price - b.price);
+        sorted = sorted.sort((a, b) => a.price - b.price);
+        break;
       case 'price-high-low':
-        return sorted.sort((a, b) => b.price - a.price);
+        sorted = sorted.sort((a, b) => b.price - a.price);
+        break;
       case 'name-a-z':
-        return sorted.sort((a, b) => a.name.localeCompare(b.name));
+        sorted = sorted.sort((a, b) => a.name.localeCompare(b.name));
+        break;
       case 'name-z-a':
-        return sorted.sort((a, b) => b.name.localeCompare(a.name));
+        sorted = sorted.sort((a, b) => b.name.localeCompare(a.name));
+        break;
       case 'newest':
-        return sorted.reverse(); // Assuming the array order represents newest to oldest
+        sorted = sorted.reverse();
+        break;
       case 'popular':
       default:
-        return sorted; // Keep original order for popular
+        // Keep original order for popular
+        break;
     }
+    
+    return sorted;
   }, [searchQuery, sortBy]);
 
   const handleSortChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -63,18 +72,21 @@ export const HomePage: React.FC<HomePageProps> = ({ onAddToCart, searchQuery }) 
           <h2 className="text-3xl font-bold text-gray-900">
             {searchQuery ? `Search Results (${filteredAndSortedProducts.length})` : 'Featured Collection'}
           </h2>
-          <select 
-            className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500"
-            value={sortBy}
-            onChange={handleSortChange}
-          >
-            <option value="popular">Sort by Popular</option>
-            <option value="price-low-high">Price: Low to High</option>
-            <option value="price-high-low">Price: High to Low</option>
-            <option value="name-a-z">Name: A to Z</option>
-            <option value="name-z-a">Name: Z to A</option>
-            <option value="newest">Newest First</option>
-          </select>
+          <div className="flex items-center gap-2">
+            <span className="text-sm text-gray-600">Sort by:</span>
+            <select 
+              className="border border-gray-300 rounded-lg px-4 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-rose-500 bg-white"
+              value={sortBy}
+              onChange={handleSortChange}
+            >
+              <option value="popular">Popular</option>
+              <option value="price-low-high">Price: Low to High</option>
+              <option value="price-high-low">Price: High to Low</option>
+              <option value="name-a-z">Name: A to Z</option>
+              <option value="name-z-a">Name: Z to A</option>
+              <option value="newest">Newest First</option>
+            </select>
+          </div>
         </div>
 
         {filteredAndSortedProducts.length === 0 ? (
