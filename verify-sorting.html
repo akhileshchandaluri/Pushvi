@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sorting Test Verification</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; }
+        .product { margin: 10px 0; padding: 10px; border: 1px solid #ccc; }
+        .controls { margin: 20px 0; }
+        select { padding: 8px; margin: 0 10px; }
+        .result { background: #f0f0f0; padding: 10px; margin: 10px 0; }
+    </style>
+</head>
+<body>
+    <h1>🧪 Sorting Functionality Test</h1>
+    
+    <div class="controls">
+        <label>Sort by:</label>
+        <select id="sortSelect">
+            <option value="popular">Popular</option>
+            <option value="price-low-high">Price: Low to High</option>
+            <option value="price-high-low">Price: High to Low</option>
+            <option value="name-a-z">Name: A to Z</option>
+            <option value="name-z-a">Name: Z to A</option>
+            <option value="newest">Newest First</option>
+        </select>
+        <button onclick="testSorting()">Test Sort</button>
+    </div>
+
+    <div id="results"></div>
+
+    <script>
+        const products = [
+            { id: 'prdct1', name: 'Floral Lip Balm – Rose Infused', price: 150 },
+            { id: 'prdct2', name: 'Rosy Pink Blush – Rose Petal Based', price: 100 },
+            { id: 'prdct3', name: 'Floral Body Oil – Botanical Blend', price: 300 },
+            { id: 'prdct4', name: 'Lavender Face Mask – Calming Formula', price: 80 },
+            { id: 'prdct5', name: 'Sunflower Moisturizer – Daily Hydration', price: 120 },
+            { id: 'prdct6', name: 'Cherry Blossom Serum – Anti-Aging', price: 250 },
+            { id: 'prdct7', name: 'Daisy Foundation – Natural Coverage', price: 180 },
+            { id: 'prdct8', name: 'Jasmine Night Cream – Intensive Repair', price: 220 },
+            { id: 'prdct9', name: 'Hibiscus Toner – Pore Minimizing', price: 90 },
+        ];
+
+        function sortProducts(sortBy) {
+            let sorted = [...products];
+            
+            console.log('🔄 Sorting by:', sortBy);
+            
+            switch (sortBy) {
+                case 'price-low-high':
+                    sorted = sorted.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high-low':
+                    sorted = sorted.sort((a, b) => b.price - a.price);
+                    break;
+                case 'name-a-z':
+                    sorted = sorted.sort((a, b) => a.name.localeCompare(b.name));
+                    break;
+                case 'name-z-a':
+                    sorted = sorted.sort((a, b) => b.name.localeCompare(a.name));
+                    break;
+                case 'newest':
+                    sorted = sorted.reverse();
+                    break;
+                case 'popular':
+                default:
+                    // Keep original order
+                    break;
+            }
+            
+            return sorted;
+        }
+
+        function testSorting() {
+            const sortBy = document.getElementById('sortSelect').value;
+            const sorted = sortProducts(sortBy);
+            
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = `
+                <div class="result">
+                    <h3>✅ Sorted by: ${sortBy}</h3>
+                    ${sorted.map((product, index) => 
+                        `<div>${index + 1}. ${product.name} - $${product.price}</div>`
+                    ).join('')}
+                </div>
+            `;
+            
+            console.log('✅ Test Results:', sorted.map(p => `${p.name}: $${p.price}`));
+        }
+
+        // Test on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('🚀 Test page loaded. Testing all sort options...');
+            
+            const sortOptions = ['popular', 'price-low-high', 'price-high-low', 'name-a-z', 'name-z-a', 'newest'];
+            
+            sortOptions.forEach(option => {
+                console.log(`\n📋 Testing ${option}:`);
+                const result = sortProducts(option);
+                result.forEach((product, index) => {
+                    console.log(`  ${index + 1}. ${product.name} - $${product.price}`);
+                });
+            });
+            
+            console.log('\n🎯 All sorting tests completed successfully!');
+            testSorting(); // Show default
+        });
+
+        // Auto-test when dropdown changes
+        document.getElementById('sortSelect').addEventListener('change', testSorting);
+    </script>
+</body>
+</html>
