@@ -15,6 +15,8 @@ function App() {
     addToCart,
     removeFromCart,
     updateQuantity,
+    getSubtotal,
+    getShippingCharge,
     getTotalPrice,
     getTotalItems,
     user,
@@ -42,6 +44,8 @@ function App() {
             cart={cart}
             updateQuantity={updateQuantity}
             removeFromCart={removeFromCart}
+            getSubtotal={getSubtotal}
+            getShippingCharge={getShippingCharge}
             getTotalPrice={getTotalPrice}
             setCurrentPage={setCurrentPage}
           />

@@ -37,8 +37,19 @@ export const useStore = () => {
     );
   };
 
-  const getTotalPrice = () => {
+  const getSubtotal = () => {
     return cart.reduce((total, item) => total + item.product.price * item.quantity, 0);
+  };
+
+  const getShippingCharge = () => {
+    const subtotal = getSubtotal();
+    return subtotal >= 500 ? 0 : 40;
+  };
+
+  const getTotalPrice = () => {
+    const subtotal = getSubtotal();
+    const shipping = getShippingCharge();
+    return subtotal + shipping;
   };
 
   const getTotalItems = () => {
@@ -61,6 +72,8 @@ export const useStore = () => {
     addToCart,
     removeFromCart,
     updateQuantity,
+    getSubtotal,
+    getShippingCharge,
     getTotalPrice,
     getTotalItems,
     user,

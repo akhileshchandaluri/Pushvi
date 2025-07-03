@@ -6,6 +6,8 @@ interface CartPageProps {
   cart: CartItem[];
   updateQuantity: (productId: string, quantity: number) => void;
   removeFromCart: (productId: string) => void;
+  getSubtotal: () => number;
+  getShippingCharge: () => number;
   getTotalPrice: () => number;
   setCurrentPage: (page: 'home') => void;
 }
@@ -14,12 +16,19 @@ export const CartPage: React.FC<CartPageProps> = ({
   cart,
   updateQuantity,
   removeFromCart,
+  getSubtotal,
+  getShippingCharge,
   getTotalPrice,
   setCurrentPage,
 }) => {
   const handleCheckout = () => {
     alert('Checkout functionality would be implemented here!');
   };
+
+  const subtotal = getSubtotal();
+  const shippingCharge = getShippingCharge();
+  const isEligibleForFreeShipping = subtotal >= 500;
+  const totalPrice = getTotalPrice();
 
   if (cart.length === 0) {
     return (
@@ -28,7 +37,7 @@ export const CartPage: React.FC<CartPageProps> = ({
           <ShoppingBag className="w-24 h-24 text-gray-300 mx-auto mb-6" />
           <h2 className="text-2xl font-bold text-gray-900 mb-4">Your cart is empty</h2>
           <p className="text-gray-600 mb-8">
-            Looks like you haven't added any lipsticks to your cart yet.
+            Looks like you haven't added any products to your cart yet.
           </p>
           <button
             onClick={() => setCurrentPage('home')}
@@ -106,20 +115,32 @@ export const CartPage: React.FC<CartPageProps> = ({
             <div className="space-y-4 mb-6">
               <div className="flex justify-between">
                 <span className="text-gray-600">Subtotal</span>
-                <span className="font-medium">₹{getTotalPrice().toFixed(2)}</span>
+                <span className="font-medium">₹{subtotal.toFixed(2)}</span>
               </div>
+              
               <div className="flex justify-between">
                 <span className="text-gray-600">Shipping</span>
-                <span className="font-medium">Free</span>
+                <div className="text-right">
+                  {isEligibleForFreeShipping ? (
+                    <div>
+                      <span className="font-medium text-green-600">Free</span>
+                      <p className="text-xs text-green-600">You qualified for free shipping!</p>
+                    </div>
+                  ) : (
+                    <div>
+                      <span className="font-medium">₹{shippingCharge.toFixed(2)}</span>
+                      <p className="text-xs text-gray-500">
+                        Add ₹{(500 - subtotal).toFixed(2)} more for free shipping
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
-              <div className="flex justify-between">
-                <span className="text-gray-600">Tax</span>
-                <span className="font-medium">₹{(getTotalPrice() * 0.08).toFixed(2)}</span>
-              </div>
+              
               <div className="border-t border-gray-200 pt-4">
                 <div className="flex justify-between text-lg font-bold">
                   <span>Total</span>
-                  <span>₹{(getTotalPrice() * 1.08).toFixed(2)}</span>
+                  <span>₹{totalPrice.toFixed(2)}</span>
                 </div>
               </div>
             </div>
