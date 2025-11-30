@@ -1,4 +1,4 @@
-# 💄 Econova — Lipstick E-commerce Website
+# 💄 PUSHVI — Lipstick E-commerce Website
 
 Welcome to **Econova**, your go-to virtual boutique for exploring and shopping premium lipsticks. Designed with elegance and built for performance, Econova offers a sleek and user-friendly shopping experience tailored for beauty enthusiasts.
 
@@ -42,3 +42,4 @@ Welcome to **Econova**, your go-to virtual boutique for exploring and shopping p
 ```bash
 git clone https://github.com/your-username/econova.git
 cd econova  
+
